@@ -9,7 +9,7 @@ function roll(){
 
 function addDice(){
     const diceDiv = document.createElement("div");
-    diceDiv.className="col"
+    diceDiv.className="col";
     diceDiv.innerHTML = `
         <div class="border border-5" style="width:16rem; height:16rem;">
             <h2>Dice 1</h2>
