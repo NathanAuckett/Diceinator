@@ -26,19 +26,19 @@
             </div>
             
             <div id="diceGrid"  class="row row-cols-auto g-5">
-                <div class="col">
-                    <div class="border border-5" style="width:16rem; height:16rem;">
+                <div id="dice-0" class="col">
+                    <div id="dice" class="border border-5" style="width:16rem; height:16rem;">
                         <h2>Dice 1</h2>
                         <h5>Result:</h5>
                         <h5 id="result">0</h5>
-                        <button onclick="roll()">Roll</button>
+                        <button onclick="roll('dice-0')">Roll</button>
                     </div><!--Dice div-->
                 </div><!--Dice col-->
             </div><!--Row-->
 
             <div class="row row-cols-6 justify-content-center">
                 <div class="col">
-                    <button onClick="roleAll()">Roll all</button>
+                    <button onClick="rollAll()">Roll all</button>
                 </div>
             </div>
 
