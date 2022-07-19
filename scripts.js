@@ -8,8 +8,15 @@ function getRoll(_sides){
 
 function roll(_id){
     let diceCol = document.querySelector(`#${_id}`);
-    let diceDiv = diceCol.querySelector("#dice");
-    diceDiv.querySelector("#result").innerHTML = getRoll(6);
+    let sides = diceCol.querySelector("#sidesDropdown").value;
+    
+    if (sides == "Custom"){ //Get custom value from custom value input?
+        sides = diceCol.querySelector("#customSides").value;
+        diceCol.querySelector("#result").innerHTML = getRoll(sides);
+    }
+    else{ //Standard sides option.
+        diceCol.querySelector("#result").innerHTML = getRoll(sides);
+    }
 }
 
 function addDice(){
@@ -45,4 +52,14 @@ function removeDice(_id){
     document.querySelector(`#${_id}`).remove();
     let index = dice.indexOf(_id); //Find index of this dice id in array
     dice.splice(index, 1); //Remove the dice id from the array
+}
+
+function dropDownChanged(_id){
+    let diceCol = document.querySelector(`#${_id}`);
+    if (diceCol.querySelector("#sidesDropdown").value == "Custom"){
+        diceCol.querySelector("#customSides").style.display = "inline";
+    }
+    else{
+        diceCol.querySelector("#customSides").style.display = "none";
+    }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
   </head>
   <body>
     <head>
@@ -13,24 +14,43 @@
     
     <div class="container">
 
-        <div style="height: 10rem; background-color: aqua;">
+        <header>
             <h1>Diceinator!</h1>
-        </div>
+        </header>
 
         <div id="diceContainer" class="container">
             
             <div class="row row-cols-6 justify-content-center">
                 <div class="col">
-                    <button onClick="addDice()">Add dice</button>
+                    <button class="btn btn-light" onClick="addDice()">Add dice</button>
                 </div>
             </div>
             
             <div id="diceGrid"  class="row row-cols-auto g-5">
                 <div id="dice-0" class="col">
-                    <div id="dice" class="border border-5" style="width:16rem; height:16rem;">
+                    <div id="dice" align="center" class="border border-5" style="width:16rem; height:20rem;">
                         <h2>Dice 1</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="sidesDropdown">Sides:</label><br>
+                                
+                                <select id="sidesDropdown" onchange="dropDownChanged('dice-0')">
+                                    <option>2</option>
+                                    <option>4</option>
+                                    <option selected>6</option>
+                                    <option>8</option>
+                                    <option>10</option>
+                                    <option>12</option>
+                                    <option>20</option>
+                                    <option>Custom</option>
+                                </select>
+                                <input id="customSides" type="number" style="width:40%; display: none"></input>
+                            </div>
+                        </form>
                         <h5>Result:</h5>
-                        <h5 id="result">0</h5>
+                        <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:8rem; height:8rem;">
+                            <h5 id="result" style="font-size: 40px;">0</h5>
+                        </div>
                         <button onclick="roll('dice-0')">Roll</button>
                     </div><!--Dice div-->
                 </div><!--Dice col-->
