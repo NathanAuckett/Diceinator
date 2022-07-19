@@ -20,13 +20,13 @@
             
             <div class="row row-cols-auto justify-content-center" style="margin-bottom: 1rem;">
                 <div class="col">
-                    <button class="btn btn-light" onClick="addDice()">Add dice</button>
+                    <button class="btn btn-danger" onClick="addDice()">Add dice</button>
                 </div>
             </div>
             
             <div id="diceGrid" class="row row-cols-auto g-1 justify-content-center">
                 <div id="dice-0" class="col">
-                    <div id="dice" align="center" class="border border-5">
+                    <div id="dice" align="center" class="border border-5 rounded-2">
                         <h2 id="diceTitle">D 6</h2>
                         <!--The bellow is only added to inserted dice.
                             This ensure the first dice cannot be removed and there must always be at least one dice-->
@@ -48,7 +48,7 @@
                         <input id="customSides" onchange="customSidesChanged('dice-0')" type="number" style="width:40%; display: none" value="50"></input>
                         
                         <h5>Result:</h5>
-                        <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
+                        <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
                             <h5 id="result">0</h5>
                         </div>
                         <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('dice-0')">Roll</button>

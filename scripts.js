@@ -30,8 +30,8 @@ function addDice(){
     
     diceDiv.innerHTML = `
     <div id="dice-0" class="col">
-        <div id="dice" align="center" class="border border-5" style="width:15rem; height:17.5rem; margin:1rem; position: relative;">
-            <h2 id="diceTitle" style="display:inline;">D 6</h2>
+        <div id="dice" align="center" class="border border-5 rounded-2"">
+            <h2 id="diceTitle">D 6</h2>
             <button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('${diceID}')"></button><br>
             
             <label for="sidesDropdown">Sides:</label><br>
@@ -49,8 +49,8 @@ function addDice(){
             <input id="customSides" onchange="customSidesChanged('${diceID}')" type="number" style="width:40%; display: none" value="50"></input>
             
             <h5>Result:</h5>
-            <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
-                <h5 id="result" style="font-size: 40px;">0</h5>
+            <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
+                <h5 id="result">0</h5>
             </div>
             <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}')">Roll</button>
         </div><!--Dice div-->
