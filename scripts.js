@@ -1,6 +1,8 @@
 
 let diceIDCount = 0; //Used to count dice ids and ensure they remain unique
-let dice = ["dice-0"]; //Stores dice arrays
+const dice = ["dice-0"]; //Stores dice arrays
+const maxSides = 9999;
+
 
 function getRoll(_sides){
     return Math.floor(Math.random() * _sides) + 1;
@@ -12,11 +14,11 @@ function roll(_id){
 
     if (sides == "Custom"){ //Get custom value from custom value input?
         sides = diceCol.querySelector("#customSides").value;
-        diceCol.querySelector("#result").innerHTML = getRoll(sides);
     }
-    else{ //Standard sides option.
-        diceCol.querySelector("#result").innerHTML = getRoll(sides);
-    }
+
+    let roll = getRoll(sides);
+    diceCol.querySelector("#result").innerHTML = roll;
+    return roll;
 }
 
 function addDice(){
@@ -28,7 +30,7 @@ function addDice(){
     
     diceDiv.innerHTML = `
     <div id="dice-0" class="col">
-        <div id="dice" align="center" class="border border-5" style="width:15rem; height:19rem; margin:1rem; position: relative;">
+        <div id="dice" align="center" class="border border-5" style="width:15rem; height:17.5rem; margin:1rem; position: relative;">
             <h2 id="diceTitle" style="display:inline;">D 6</h2>
             <button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('${diceID}')"></button><br>
             
@@ -47,7 +49,7 @@ function addDice(){
             <input id="customSides" onchange="customSidesChanged('${diceID}')" type="number" style="width:40%; display: none" value="50"></input>
             
             <h5>Result:</h5>
-            <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:7.5rem; height:7.5rem;">
+            <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
                 <h5 id="result" style="font-size: 40px;">0</h5>
             </div>
             <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}')">Roll</button>
@@ -63,9 +65,11 @@ function addDice(){
 
 function rollAll(){
     let diceCount = dice.length;
+    let total = 0;
     for (let i = 0; i < diceCount; i ++){
-        roll(dice[i]);
+        total += roll(dice[i]);
     }
+    document.getElementById("totalRoll").innerHTML = `Total: ${total}`;
 }
 
 function removeDice(_id){
@@ -100,8 +104,8 @@ function customSidesChanged(_id){
     if (sides < 2){
         sides = 2;
     }
-    else if (sides > 99999){
-        sides = 99999;
+    else if (sides > maxSides){
+        sides = maxSides;
     }
     diceCol.querySelector("#customSides").value = sides;
     diceTitle.innerHTML = `D ${sides}`;
