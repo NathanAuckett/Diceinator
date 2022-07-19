@@ -3,10 +3,3 @@ body{
     background-color: rgb(27, 27, 27);
     color: white;
 }
-
-header{
-    color: black;
-    height: 10rem;
-    background-color: rgb(255, 255, 255);
-    margin-bottom: 1rem;
-}
