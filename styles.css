@@ -3,3 +3,23 @@ body{
     background-color: rgb(27, 27, 27);
     color: white;
 }
+
+#siteTitle{
+    font-family: 'Source Code Pro Black';
+    margin-bottom: 1rem;
+}
+
+#dice{
+    width:15rem;
+    height:17.5rem;
+    margin:1rem;
+    position: relative;
+}
+#diceTitle{
+    display:inline;
+}
+
+/*The number result within the dice box*/
+#result{
+    font-size: 40px;
+}
