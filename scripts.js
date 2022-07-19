@@ -9,7 +9,7 @@ function getRoll(_sides){
 function roll(_id){
     let diceCol = document.querySelector(`#${_id}`);
     let sides = diceCol.querySelector("#sidesDropdown").value;
-    
+
     if (sides == "Custom"){ //Get custom value from custom value input?
         sides = diceCol.querySelector("#customSides").value;
         diceCol.querySelector("#result").innerHTML = getRoll(sides);
@@ -27,13 +27,33 @@ function addDice(){
     diceDiv.id = diceID;
     
     diceDiv.innerHTML = `
-        <div id="dice" class="border border-5" style="width:16rem; height:16rem;">
-            <h2>Dice 1</h2>
+    <div id="dice-0" class="col">
+        <div id="dice" align="center" class="border border-5" style="width:15rem; height:19rem; margin:1rem; position: relative;">
+            <h2 id="diceTitle" style="display:inline;">D 6</h2>
+            <button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('${diceID}')"></button><br>
+            
+            <label for="sidesDropdown">Sides:</label><br>
+            
+            <select id="sidesDropdown" onchange="dropDownChanged('${diceID}')">
+                <option>2</option>
+                <option>4</option>
+                <option selected>6</option>
+                <option>8</option>
+                <option>10</option>
+                <option>12</option>
+                <option>20</option>
+                <option>Custom</option>
+            </select>
+            <input id="customSides" onchange="customSidesChanged('${diceID}')" type="number" style="width:40%; display: none" value="50"></input>
+            
             <h5>Result:</h5>
-            <h5 id="result">0</h5>
-            <button onclick="roll('${diceID}')">Roll</button>
-            <button onclick="removeDice('${diceID}')">Remove</button>
-        </div><!--Dice div-->`;
+            <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:7.5rem; height:7.5rem;">
+                <h5 id="result" style="font-size: 40px;">0</h5>
+            </div>
+            <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}')">Roll</button>
+        </div><!--Dice div-->
+    </div><!--Dice col-->
+    `;
 
     var diceContainer = document.getElementById("diceGrid");
     diceContainer.appendChild(diceDiv);
@@ -56,10 +76,33 @@ function removeDice(_id){
 
 function dropDownChanged(_id){
     let diceCol = document.querySelector(`#${_id}`);
-    if (diceCol.querySelector("#sidesDropdown").value == "Custom"){
-        diceCol.querySelector("#customSides").style.display = "inline";
+    let diceTitle = diceCol.querySelector("#diceTitle");
+    let diceDropDown = diceCol.querySelector("#sidesDropdown");
+    let diceCustomInput = diceCol.querySelector("#customSides");
+
+    if (diceDropDown.value == "Custom"){
+        diceTitle.innerHTML = `D ${diceCustomInput.value}`;
+        diceCustomInput.style.display = "inline";
     }
     else{
-        diceCol.querySelector("#customSides").style.display = "none";
+        diceTitle.innerHTML = `D ${diceDropDown.value}`;
+        diceCustomInput.style.display = "none";
     }
+}
+
+// Validate the sides selection
+function customSidesChanged(_id){
+    let diceCol = document.querySelector(`#${_id}`);
+    let sides = diceCol.querySelector("#customSides").value;
+    let diceTitle = diceCol.querySelector("#diceTitle");
+
+    sides = Math.floor(sides);
+    if (sides < 2){
+        sides = 2;
+    }
+    else if (sides > 99999){
+        sides = 99999;
+    }
+    diceCol.querySelector("#customSides").value = sides;
+    diceTitle.innerHTML = `D ${sides}`;
 }

@@ -20,45 +20,45 @@
 
         <div id="diceContainer" class="container">
             
-            <div class="row row-cols-6 justify-content-center">
+            <div class="row row-cols-auto justify-content-center" style="margin-bottom: 1rem;">
                 <div class="col">
                     <button class="btn btn-light" onClick="addDice()">Add dice</button>
                 </div>
             </div>
             
-            <div id="diceGrid"  class="row row-cols-auto g-5">
+            <div id="diceGrid" class="row row-cols-auto g-4 justify-content-center">
                 <div id="dice-0" class="col">
-                    <div id="dice" align="center" class="border border-5" style="width:16rem; height:20rem;">
-                        <h2>Dice 1</h2>
-                        <form>
-                            <div class="form-group">
-                                <label for="sidesDropdown">Sides:</label><br>
-                                
-                                <select id="sidesDropdown" onchange="dropDownChanged('dice-0')">
-                                    <option>2</option>
-                                    <option>4</option>
-                                    <option selected>6</option>
-                                    <option>8</option>
-                                    <option>10</option>
-                                    <option>12</option>
-                                    <option>20</option>
-                                    <option>Custom</option>
-                                </select>
-                                <input id="customSides" type="number" style="width:40%; display: none"></input>
-                            </div>
-                        </form>
+                    <div id="dice" align="center" class="border border-5" style="width:15rem; height:19rem; margin:1rem; position: relative;">
+                        <h2 id="diceTitle" style="display:inline;">D 6</h2>
+                        <!--<button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('dice-0')"></button>-->
+                        <br>
+                        
+                        <label for="sidesDropdown">Sides:</label><br>
+                        
+                        <select id="sidesDropdown" onchange="dropDownChanged('dice-0')">
+                            <option>2</option>
+                            <option>4</option>
+                            <option selected>6</option>
+                            <option>8</option>
+                            <option>10</option>
+                            <option>12</option>
+                            <option>20</option>
+                            <option>Custom</option>
+                        </select>
+                        <input id="customSides" onchange="customSidesChanged('dice-0')" type="number" style="width:40%; display: none" value="50"></input>
+                        
                         <h5>Result:</h5>
-                        <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:8rem; height:8rem;">
+                        <div align="center" class="justif border border-5 d-flex justify-content-center align-items-center" style="width:7.5rem; height:7.5rem;">
                             <h5 id="result" style="font-size: 40px;">0</h5>
                         </div>
-                        <button onclick="roll('dice-0')">Roll</button>
+                        <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('dice-0')">Roll</button>
                     </div><!--Dice div-->
                 </div><!--Dice col-->
             </div><!--Row-->
 
-            <div class="row row-cols-6 justify-content-center">
+            <div class="row row-cols-auto justify-content-center">
                 <div class="col">
-                    <button onClick="rollAll()">Roll all</button>
+                    <button class="btn btn-light" onClick="rollAll()">Roll all</button>
                 </div>
             </div>
 
