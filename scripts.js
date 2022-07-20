@@ -3,6 +3,35 @@ let diceIDCount = 0; //Used to count dice ids and ensure they remain unique
 const dice = ["dice-0"]; //Stores dice arrays
 const maxSides = 9999;
 
+function diceHTML(diceID) {
+    return `
+    <div id="dice-0" class="col">
+    <div id="dice" align="center" class="border border-5 rounded-2"">
+    <h2 id="diceTitle">D 6</h2>
+    <button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('${diceID}')"></button><br>
+    
+    <label for="sidesDropdown">Sides:</label><br>
+    
+    <select id="sidesDropdown" onchange="dropDownChanged('${diceID}')">
+        <option>2</option>
+        <option>4</option>
+        <option selected>6</option>
+        <option>8</option>
+        <option>10</option>
+        <option>12</option>
+        <option>20</option>
+        <option>Custom</option>
+    </select>
+    <input id="customSides" onchange="customSidesChanged('${diceID}')" type="number" style="width:40%; display: none" value="50"></input>
+    
+    <h5>Result:</h5>
+    <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
+        <h5 id="result">0</h5>
+    </div>
+    <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}')">Roll</button>
+    </div><!--Dice div-->
+    </div><!--Dice col-->`
+}
 
 function getRoll(_sides){
     return Math.floor(Math.random() * _sides) + 1;
@@ -18,6 +47,7 @@ function roll(_id){
 
     let roll = getRoll(sides);
     diceCol.querySelector("#result").innerHTML = roll;
+    
     return roll;
 }
 
@@ -28,34 +58,7 @@ function addDice(){
     diceDiv.className = "col";
     diceDiv.id = diceID;
     
-    diceDiv.innerHTML = `
-    <div id="dice-0" class="col">
-        <div id="dice" align="center" class="border border-5 rounded-2"">
-            <h2 id="diceTitle">D 6</h2>
-            <button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('${diceID}')"></button><br>
-            
-            <label for="sidesDropdown">Sides:</label><br>
-            
-            <select id="sidesDropdown" onchange="dropDownChanged('${diceID}')">
-                <option>2</option>
-                <option>4</option>
-                <option selected>6</option>
-                <option>8</option>
-                <option>10</option>
-                <option>12</option>
-                <option>20</option>
-                <option>Custom</option>
-            </select>
-            <input id="customSides" onchange="customSidesChanged('${diceID}')" type="number" style="width:40%; display: none" value="50"></input>
-            
-            <h5>Result:</h5>
-            <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
-                <h5 id="result">0</h5>
-            </div>
-            <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}')">Roll</button>
-        </div><!--Dice div-->
-    </div><!--Dice col-->
-    `;
+    diceDiv.innerHTML = diceHTML(diceID);
 
     var diceContainer = document.getElementById("diceGrid");
     diceContainer.appendChild(diceDiv);
