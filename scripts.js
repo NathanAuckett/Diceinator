@@ -3,6 +3,11 @@ let diceIDCount = 0; //Used to count dice ids and ensure they remain unique
 const dice = ["dice-0"]; //Stores dice arrays
 const maxSides = 9999;
 
+const rollMax = 10;
+let rollCount = {};
+rollCount["dice-0"] = 0;
+let gotTotal = false;
+
 function diceHTML(diceID) {
     return `
     <div id="dice-0" class="col">
@@ -28,9 +33,32 @@ function diceHTML(diceID) {
     <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
         <h5 id="result">0</h5>
     </div>
-    <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}')">Roll</button>
+    <button id="btnRoll" class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}'); gotTotal=false; disableAllButtons();">Roll</button>
     </div><!--Dice div-->
     </div><!--Dice col-->`
+}
+
+function disableAllButtons(){
+    document.getElementById("btnRollAll").disabled = true;
+    document.getElementById("btnAddDice").disabled = true;
+
+    let diceCount = dice.length;
+    for (let i = 0; i < diceCount; i ++){
+        let _id = dice[i];
+        let diceCol = document.querySelector(`#${_id}`);
+        diceCol.querySelector("#btnRoll").disabled = true;
+    }
+}
+function enableAllButtons(){
+    document.getElementById("btnRollAll").disabled = false;
+    document.getElementById("btnAddDice").disabled = false;
+
+    let diceCount = dice.length;
+    for (let i = 0; i < diceCount; i ++){
+        let _id = dice[i];
+        let diceCol = document.querySelector(`#${_id}`);
+        diceCol.querySelector("#btnRoll").disabled = false;
+    }
 }
 
 function getRoll(_sides){
@@ -48,11 +76,49 @@ function roll(_id){
     let roll = getRoll(sides);
     diceCol.querySelector("#result").innerHTML = roll;
     
+    if (rollCount[_id] < rollMax){
+        repeatRoll(_id);
+        rollCount[_id] ++;
+    }
+    else{
+        if (!gotTotal){
+            enableAllButtons();
+            setTimeout(getTotal, 10);
+            gotTotal = true;
+        }
+        rollCount[_id] = 0;
+    }
+
     return roll;
+}
+
+function repeatRoll(_id){
+    setTimeout(roll, 100, _id);
+}
+
+function rollAll(){
+    let diceCount = dice.length;
+    let total = 0;
+    for (let i = 0; i < diceCount; i ++){
+        total += roll(dice[i]);
+    }
+}
+
+function getTotal(){
+    let diceCount = dice.length;
+    let total = 0;
+    for (let i = 0; i < diceCount; i ++){
+        let _id = dice[i];
+        let diceCol = document.querySelector(`#${_id}`);
+        let value = Number(diceCol.querySelector("#result").innerHTML);
+        total += value;
+    }
+    document.getElementById("totalRoll").innerHTML = `Total: ${total}`;
 }
 
 function addDice(){
     let diceID = `dice-${++diceIDCount}`;
+    rollCount[diceID] = 0;
 
     const diceDiv = document.createElement("div");
     diceDiv.className = "col";
@@ -64,15 +130,6 @@ function addDice(){
     diceContainer.appendChild(diceDiv);
 
     dice.push(diceID);
-}
-
-function rollAll(){
-    let diceCount = dice.length;
-    let total = 0;
-    for (let i = 0; i < diceCount; i ++){
-        total += roll(dice[i]);
-    }
-    document.getElementById("totalRoll").innerHTML = `Total: ${total}`;
 }
 
 function removeDice(_id){

@@ -20,7 +20,7 @@
             
             <div class="row row-cols-auto justify-content-center" style="margin-bottom: 1rem;">
                 <div class="col">
-                    <button class="btn btn-danger" onClick="addDice()">Add dice</button>
+                    <button id="btnAddDice" class="btn btn-danger" onClick="addDice()">Add dice</button>
                 </div>
             </div>
             
@@ -51,14 +51,14 @@
                         <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
                             <h5 id="result">0</h5>
                         </div>
-                        <button class="btn btn-light" style="margin: 0.2rem" onclick="roll('dice-0')">Roll</button>
+                        <button id="btnRoll" class="btn btn-light" style="margin: 0.2rem" onclick="roll('dice-0'); gotTotal = false; disableAllButtons();">Roll</button>
                     </div><!--Dice div-->
                 </div><!--Dice col-->
             </div><!--Row-->
 
             <div class="row row-cols-auto justify-content-center">
                 <div class="col">
-                    <button class="btn btn-light" onClick="rollAll()">Roll all</button>
+                    <button id="btnRollAll" class="btn btn-light" onClick="rollAll(); gotTotal = false; disableAllButtons();">Roll all</button>
                 </div>
             </div>
             <div class="row row-cols-auto justify-content-center">
