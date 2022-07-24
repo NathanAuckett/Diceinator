@@ -30,10 +30,10 @@ function diceHTML(diceID) {
     <input id="customSides" onchange="customSidesChanged('${diceID}')" type="number" style="width:40%; display: none" value="50"></input>
     
     <h5>Result:</h5>
-    <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
+    <div id="resultBorder" align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
         <h5 id="result">0</h5>
     </div>
-    <button id="btnRoll" class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}'); gotTotal=false; disableAllButtons();">Roll</button>
+    <button id="btnRoll" class="btn btn-light" style="margin: 0.2rem" onclick="roll('${diceID}'); rollAnimStart('${diceID}'); gotTotal=false; disableAllButtons();">Roll</button>
     </div><!--Dice div-->
     </div><!--Dice col-->`
 }
@@ -63,6 +63,14 @@ function enableAllButtons(){
 
 function getRoll(_sides){
     return Math.floor(Math.random() * _sides) + 1;
+}
+
+function rollAnimStart(_id){
+    let diceCol = document.querySelector(`#${_id}`);
+    let resultBorder = diceCol.querySelector("#resultBorder");
+    resultBorder.classList.remove('diceSpin'); // reset animation
+    resultBorder.offsetWidth; // trigger reflow
+    resultBorder.classList.add('diceSpin'); // start animation
 }
 
 function roll(_id){
@@ -100,6 +108,7 @@ function rollAll(){
     let diceCount = dice.length;
     let total = 0;
     for (let i = 0; i < diceCount; i ++){
+        rollAnimStart(dice[i]);
         total += roll(dice[i]);
     }
 }

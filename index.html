@@ -48,10 +48,10 @@
                         <input id="customSides" onchange="customSidesChanged('dice-0')" type="number" style="width:40%; display: none" value="50"></input>
                         
                         <h5>Result:</h5>
-                        <div align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
+                        <div id="resultBorder"; align="center" class="justif border border-5 rounded-4 d-flex justify-content-center align-items-center" style="width:6.5rem; height:6.5rem;">
                             <h5 id="result">0</h5>
                         </div>
-                        <button id="btnRoll" class="btn btn-light" style="margin: 0.2rem" onclick="roll('dice-0'); gotTotal = false; disableAllButtons();">Roll</button>
+                        <button id="btnRoll" class="btn btn-light" style="margin: 0.2rem" onclick="roll('dice-0'); rollAnimStart('dice-0'); gotTotal = false; disableAllButtons();">Roll</button>
                     </div><!--Dice div-->
                 </div><!--Dice col-->
             </div><!--Row-->
