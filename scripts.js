@@ -15,7 +15,7 @@ function diceHTML(diceID) {
     <h2 id="diceTitle">D 6</h2>
     <button class="btn-close btn-close-white" style="margin:0.2rem; position:absolute; top:0; right:0;" onclick="removeDice('${diceID}')"></button><br>
     
-    <label for="sidesDropdown">Sides:</label><br>
+    <label style="display: block" for="sidesDropdown">Sides:</label>
     
     <select id="sidesDropdown" onchange="dropDownChanged('${diceID}')">
         <option>2</option>
